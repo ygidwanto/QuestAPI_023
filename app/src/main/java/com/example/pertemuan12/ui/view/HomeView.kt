@@ -1,9 +1,11 @@
 package com.example.pertemuan12.ui.view
 
 import android.graphics.drawable.Icon
+import android.media.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -15,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pertemuan12.model.Mahasiswa
@@ -90,7 +93,21 @@ fun HomeStatus(
             }else{
                 MhsLayout(
 
+                    mahasiswa= homeUiState.mahasiswa, modifier=modifier.fillMaxWidth(),
+                    onDetailClick={
+                        onDetailClick(it)
+                    }
                 )
             }
+        is HomeUiState.Error -> OnError(retryAction,modifier=modifier.fillMaxSize())
     }
+}
+
+@Composable
+fun OnLoading(modifier: java.lang.reflect.Modifier= Modifier){
+    Image(
+        modifier=modifier.size(200.dp)
+        painter= painterResource(R.drawable.images.jpg),
+        contentDescription= stringResource(R.string.loading)
+    )
 }
