@@ -11,7 +11,7 @@ class InsertViewModel(private val mhs: MahasiswaRepository): ViewModel() {
     var uiState by mutableStateOf(InsertUiState())
         private set
     fun updateInsertMhsState(insertUiEvent.InsertUiEvent){
-        uiState=InsertUiState(insertUievent = insertUiEvent)
+        uiState=InsertUiState(insertUievent = InsertUiEvent)
     }
 
     suspend fun insertMhs(){
