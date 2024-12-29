@@ -1,4 +1,4 @@
-package com.example.pertemuan12.viewmodel
+package com.example.pertemuan12.ui.viewmodel
 
 import android.net.http.HttpException
 import androidx.compose.runtime.mutableStateOf
