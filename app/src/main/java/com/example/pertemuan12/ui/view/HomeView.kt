@@ -2,10 +2,13 @@ package com.example.pertemuan12.ui.view
 
 import android.graphics.drawable.Icon
 import android.media.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -17,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -110,4 +114,21 @@ fun OnLoading(modifier: java.lang.reflect.Modifier= Modifier){
         painter= painterResource(R.drawable.images.jpg),
         contentDescription= stringResource(R.string.loading)
     )
+}
+
+@Composable
+fun OnError(retryAction: () -> Unit, modifier: Modifier= Modifier){
+    Column (
+        modifier = Modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
+        Image(
+            painter= painterResource(id=R.drawable.ic_connection_error),contentDescription = ""
+        )
+        Text(text = stringResource(R.string.loading_failed), modifier = Modifier.padding(16.dp))
+        Button(onClick = retryAction){
+            Text(stringResource(R.string.retry))
+        }
+    }
 }
