@@ -5,9 +5,11 @@ import android.media.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -129,6 +131,32 @@ fun OnError(retryAction: () -> Unit, modifier: Modifier= Modifier){
         Text(text = stringResource(R.string.loading_failed), modifier = Modifier.padding(16.dp))
         Button(onClick = retryAction){
             Text(stringResource(R.string.retry))
+        }
+    }
+}
+
+@Composable
+fun MhsLayout(
+    mahasiswa: List<Mahasiswa>,
+    modifier: Modifier= Modifier,
+    onDetailClick: (String) -> Unit,
+    onDeleteClick: (Mahasiswa) -> Unit ={}
+){
+    LazyColumn (
+        modifier = Modifier,
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ){
+        items(mahasiswa){kontak->
+            MhsCard(
+                mahasiswa= kontak,
+                modifier=modifier
+                    .fillMaxWidth()
+                    .clickable{onDetailClick(kontak)},
+                onDeleteClick={
+                    onDeleteClick(kontak)
+                }
+            )
         }
     }
 }
