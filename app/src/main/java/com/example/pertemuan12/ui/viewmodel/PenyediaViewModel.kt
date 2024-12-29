@@ -2,20 +2,20 @@ package com.example.pertemuan12.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.CreationExtras
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.pertemuan12.MahasiswaApplications
+import com.example.pertemuan12.dependenciesinjection.MahasiswaContainer
 import com.example.pertemuan12.repository.MahasiswaRepository
 
 
 object PenyediaViewModel {
     // Factory class to provide ViewModel instances
-    val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {
-        @Suppress("UNCHECKED_CAST")
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return when {
-                modelClass.isAssignableFrom(InsertViewModel::class.java) -> {
-                    InsertViewModel(MahasiswaRepository) as T
-                }
-                else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
-            }
-        }
+    val Factory= viewModelFactory {
+        initializer { HomeViewModel(MahasiswaContainer().container.kontakRepository) }
+        initializer { InsertViewModel(MahasiswaContainer().container.kontakRepository) }
     }
 }
+fun CreationExtras.MahasiswaContainer(): MahasiswaApplications =
+    ((this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY]as MahasiswaApplications))
